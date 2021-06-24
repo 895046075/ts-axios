@@ -24,13 +24,13 @@ export function bulidURL(url: string, params?: any): string {
     let values = []
     if (Array.isArray(val)) {
       values = val
-      key += '['
+      key += '[]'
     } else {
       values = [val]
     }
     values.forEach((val) => {
       if (isDate(val)) {
-        val = val.toString()
+        val = val.toISOString()
       } else if (isObject(val)) {
         val = JSON.stringify(val)
       }
