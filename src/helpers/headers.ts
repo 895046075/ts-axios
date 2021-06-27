@@ -1,4 +1,4 @@
-import { isPlainObject } from "./util";
+import { isPlainObject } from './util';
 
 function normalizeHeaderName(headers: any, normalizedName: string): void {
   if (!headers) {
