@@ -1,6 +1,6 @@
-import Axios from './core/Axios';
-import { AxiosInstance } from './types';
-import {extend} from './helpers/util'
+import Axios from './core/Axios'
+import { AxiosInstance } from './types'
+import { extend } from './helpers/util'
 
 function createInstance(): AxiosInstance {
   const context = new Axios()

@@ -1,4 +1,4 @@
-import { isPlainObject } from './util';
+import { isPlainObject } from './util'
 
 export function transformRequest(data: any) {
   if (isPlainObject(data)) {
@@ -7,7 +7,7 @@ export function transformRequest(data: any) {
   return data
 }
 
-export function transformResponse(data:any):any {
+export function transformResponse(data: any): any {
   if (typeof data === 'string') {
     try {
       data = JSON.parse(data)

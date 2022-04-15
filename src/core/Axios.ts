@@ -1,5 +1,12 @@
-import { AxiosPromise, AxiosRequestConfig, AxiosResponse, Method, ResolvedFn,RejectedFn } from '../types';
-import dispatchRequest from './dispatchReques';
+import {
+  AxiosPromise,
+  AxiosRequestConfig,
+  AxiosResponse,
+  Method,
+  ResolvedFn,
+  RejectedFn
+} from '../types'
+import dispatchRequest from './dispatchReques'
 import InterceptorManager from './InterceptorManager'
 
 interface Interceptors {
@@ -8,7 +15,7 @@ interface Interceptors {
 }
 
 interface PromiseChain<T> {
-  resolved: ResolvedFn<T> | ((config: AxiosRequestConfig) => AxiosPromise) ,
+  resolved: ResolvedFn<T> | ((config: AxiosRequestConfig) => AxiosPromise)
   rejected?: RejectedFn | undefined
 }
 
@@ -32,10 +39,12 @@ export default class Axios {
       config = url
     }
 
-    const chain: PromiseChain<any>[] = [{
-      resolved: dispatchRequest,
-      rejected: undefined
-    }]
+    const chain: PromiseChain<any>[] = [
+      {
+        resolved: dispatchRequest,
+        rejected: undefined
+      }
+    ]
 
     this.interceptors.request.forEach(interceptor => {
       chain.unshift(interceptor)
@@ -68,15 +77,28 @@ export default class Axios {
     return this._requestMethodWithData('put', url, data, config)
   }
 
-  _requestMethodWithoutData(method: Method, url: string, config?: AxiosRequestConfig) {
-    return this.request(Object.assign(config || {}, {
-      method,
-    }))
+  _requestMethodWithoutData(
+    method: Method,
+    url: string,
+    config?: AxiosRequestConfig
+  ) {
+    return this.request(
+      Object.assign(config || {}, {
+        method
+      })
+    )
   }
-  _requestMethodWithData(method: Method, url: string, data?: any, config?: AxiosRequestConfig) {
-    return this.request(Object.assign(config || {}, {
-      method,
-      data
-    }))
+  _requestMethodWithData(
+    method: Method,
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ) {
+    return this.request(
+      Object.assign(config || {}, {
+        method,
+        data
+      })
+    )
   }
 }

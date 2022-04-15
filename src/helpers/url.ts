@@ -3,12 +3,12 @@ import { isDate, isPlainObject } from './util'
 function encode(val: string): string {
   return encodeURIComponent(val)
     .replace(/%40/g, '@')
-    .replace(/%3A/ig, ':')
+    .replace(/%3A/gi, ':')
     .replace(/%24/g, '$')
-    .replace(/%2c/ig, ',')
+    .replace(/%2c/gi, ',')
     .replace(/%20/g, '+')
-    .replace(/%5B/ig, '[')
-    .replace(/%5D/ig,']')
+    .replace(/%5B/gi, '[')
+    .replace(/%5D/gi, ']')
 }
 
 export function bulidURL(url: string, params?: any): string {
@@ -16,7 +16,7 @@ export function bulidURL(url: string, params?: any): string {
     return url
   }
   const parts: string[] = []
-  Object.keys(params).forEach((key) => {
+  Object.keys(params).forEach(key => {
     const val = params[key]
     if (val === null || typeof val === 'undefined') {
       return
@@ -28,7 +28,7 @@ export function bulidURL(url: string, params?: any): string {
     } else {
       values = [val]
     }
-    values.forEach((val) => {
+    values.forEach(val => {
       if (isDate(val)) {
         val = val.toISOString()
       } else if (isPlainObject(val)) {
@@ -41,7 +41,7 @@ export function bulidURL(url: string, params?: any): string {
   if (serializedParams) {
     const markIndex = url.indexOf('#')
     if (markIndex !== -1) {
-      url = url.slice(0,markIndex)
+      url = url.slice(0, markIndex)
     }
     url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams
   }
